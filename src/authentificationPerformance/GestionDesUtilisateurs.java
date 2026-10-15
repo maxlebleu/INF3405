@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
@@ -42,7 +42,7 @@ public class GestionDesUtilisateurs {
 	}
 		else {
 			comptes.put(nom, mdp);
-			sauvegarderComptes();           // persistance (4.5)
+			sauvegarderCompte(nom, mdp);           // persistance (4.5)
 	        connectes.add(nom);
 	        return EtatDeConnexion.CONNEXION_ACCEPTEE;
 			/*ajouté l'utlisateur au serveur avec son mot de passe dans la liste de compte*/
@@ -68,22 +68,14 @@ public class GestionDesUtilisateurs {
 	        }
 	    }
 
-	    private void sauvegarderComptes() {
-	        Path temporaire = Paths.get(FICHIER_COMPTES + ".tmp");
-	        try (BufferedWriter ecrivain = Files.newBufferedWriter(temporaire)) {
-	            for (Map.Entry<String, String> compte : comptes.entrySet()) {
-	                ecrivain.write(compte.getKey() + SEPARATEUR + compte.getValue());
-	                ecrivain.newLine();
-	            }
-	        } catch (IOException e) {
-	            System.err.println("Erreur d'écriture des comptes : " + e.getMessage());
-	            return;
-	        }
-	        try {
-	            Files.move(temporaire, Paths.get(FICHIER_COMPTES),
-	                       StandardCopyOption.REPLACE_EXISTING);
-	        } catch (IOException e) {
-	            System.err.println("Erreur de sauvegarde des comptes : " + e.getMessage());
-	        }
-	    }
+	 private void sauvegarderCompte(String nom, String mdp) {
+		    try (BufferedWriter ecrivain = Files.newBufferedWriter(
+		            Paths.get(FICHIER_COMPTES),
+		            StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
+		        ecrivain.write(nom + SEPARATEUR + mdp);
+		        ecrivain.newLine();
+		    } catch (IOException e) {
+		        System.err.println("Erreur d'écriture du compte : " + e.getMessage());
+		    }
+		}
 }
