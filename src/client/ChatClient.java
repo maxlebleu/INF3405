@@ -11,6 +11,8 @@ import java.net.Socket;
 
 import java.util.Scanner;
 
+import shared.Protocol;
+
 public class ChatClient {
 
     private final String host;
@@ -66,22 +68,11 @@ public class ChatClient {
 
         socket = new Socket();
 
-        socket.connect(
-                new InetSocketAddress(host, port),
-                5000
-        );
+        socket.connect(new InetSocketAddress(host, port), 5000);
 
-        in = new DataInputStream(
-                new BufferedInputStream(
-                        socket.getInputStream()
-                )
-        );
+        in = new DataInputStream(new BufferedInputStream(socket.getInputStream()));
 
-        out = new DataOutputStream(
-                new BufferedOutputStream(
-                        socket.getOutputStream()
-                )
-        );
+        out = new DataOutputStream(new BufferedOutputStream(socket.getOutputStream()));
 
         System.out.println(
                 "Connexion établie avec " + host + ":" + port

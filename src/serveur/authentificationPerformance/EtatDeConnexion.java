@@ -1,4 +1,4 @@
-package authentificationPerformance;
+package serveur.authentificationPerformance;
 
 public enum EtatDeConnexion {
 	CONNEXION_ACCEPTEE,

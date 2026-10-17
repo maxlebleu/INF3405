@@ -1,0 +1,3 @@
+[Max - 10.200.26.27:8688 - 2026-10-17@13:20:54] : Je suis hereux d'Etre la
+[Max - 10.200.26.27:8712 - 2026-10-17@13:36:36] : Je viens de tester le jar sur mon cmd
+[Max - 10.200.26.27:8712 - 2026-10-17@13:36:48] : Ca marche super bien

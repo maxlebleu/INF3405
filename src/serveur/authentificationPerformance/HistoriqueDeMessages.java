@@ -1,4 +1,4 @@
-package authentificationPerformance;
+package serveur.authentificationPerformance;
 import java.io.BufferedReader;
 	import java.io.BufferedWriter;
 	import java.io.IOException;
